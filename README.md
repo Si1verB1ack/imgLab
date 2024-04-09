@@ -1,13 +1,19 @@
-start mysql service in Xammp.
+###Read This
+````
+1. 
+    composer update
+    
+    php artisan key:generate
 
-composer update
+2.
+    env.example to .env
 
-cp .env.example .env
+3. 
+    php artisan migrate
 
-php artisan key:generate
+4.
+    php artisan db:seed
 
-php artisan:migrate
+5.
+    php artisan serve
 
-php artisan db:seed
-
-php artisan serve
