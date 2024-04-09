@@ -58,7 +58,7 @@
                         <tr>
                             <td scope="row">updated at: {{$product->updated_at}}</td>
                         </tr>
-                        {{-- <tr>
+                        <tr>
                             <td>
                                 <label>
                                     Enter Qty you would like to buy
@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                             </td>
-                        </tr> --}}
+                        </tr>
                 </tbody>
             </table>
         </div>

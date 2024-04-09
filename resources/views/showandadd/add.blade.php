@@ -58,17 +58,38 @@
                         <option value="{{$cate->id}}">{{$cate->name}}</option>
                     @endforeach
                 </select>
-                    <label for="image" class="form-label">Choose product image</label>
-                    <input type="file" name="image" id="image" class="form-control" value="{{ old('image') }}">
+
+                <label for="image" class="form-label">Choose product image</label>
+                <input type="file" name="image" id="image" class="form-control" value="{{ old('image') }}">
                 <br>
                 @if($errors->has('image') && !old('image'))
                     @error('image')
                         <p style="color:#aa2833;">{{ $message }}</p>
                     @enderror
                 @endif
+
+                <label for="imagePreview" class="form-label">Image Preview</label>
+                <img class="img-fluid rounded mx-auto d-block" src="{{ asset('storage/no_image.png')}}" id="file-preview">
+                <br>
+                <br>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
     </div>
+    <script>
+        const input = document.getElementById('image');
+        const previewPhoto = () => {
+        const file = input.files;
+            if (file) {
+                const fileReader = new FileReader();
+                const preview = document.getElementById('file-preview');
+                                fileReader.onload = function (event) {
+                    preview.setAttribute('src', event.target.result);
+                }
+                fileReader.readAsDataURL(file[0]);
+            }
+        }
+        input.addEventListener("change", previewPhoto);
+    </script>
 </body>
 </html>
