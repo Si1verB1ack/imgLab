@@ -15,5 +15,8 @@
     php artisan db:seed
 
 5.
+    php artisan storage:link
+
+6.
     php artisan serve
 
