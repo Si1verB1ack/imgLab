@@ -65,11 +65,19 @@ class ShowAndAddController extends Controller
     }
     public function savedit(Request $request,Product $product){
         // dd($product);
-        $product->name= $request->name;
-        $product->description= $request->description;
+        $file= $request->file('image');
+
+        $extension = $file->getClientOriginalExtension();
+
+        $imageName= 'test_'.time().'.'.$extension;
+
+        $path = Storage::putFileAs('public', $file, $imageName);
+        $product->name = $request->name;
+        $product->description = $request->description;
         $product->price = $request->price;
+        $product->image = $imageName;
         $product->quantity_in_stock = $request->quantity_in_stock;
-        $product->categoryid= $request->categoryid;
+        $product->categoryid = $request->categoryid;
 
         $product->save();
         return redirect()->route('select')->with(['message'=> 'Product has been updated successfully']);

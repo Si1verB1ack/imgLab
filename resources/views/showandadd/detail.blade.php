@@ -65,7 +65,7 @@
                                 </label>
                                 <input type="number" step="1" id="quantity_in_stock" min="0" max="{{$product->quantity_in_stock}}" value="0"/>
                             </td>
-                        </tr> --}}
+                        </tr>
                         {{-- <tr>
                             <td scope="row">
                                 <div class="container text-center">
@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                             </td>
-                        </tr>
+                        </tr> --}}
                 </tbody>
             </table>
         </div>

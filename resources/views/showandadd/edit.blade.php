@@ -22,7 +22,7 @@
 <body>
     <div class="card mx-auto" style="width: 40rem;">
 
-        <form method="POST" action="{{route('updatesave',$product->id)}}" onsubmit="confirmation(this)">
+        <form method="POST" action="{{route('updatesave',$product->id)}}" onsubmit="confirmation(this)" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="text" class="form-label">Name</label>
@@ -48,11 +48,37 @@
                     @endforeach
                 </select>
                 <br>
+                <label for="image" class="form-label">Choose product image</label>
+                <input type="file" name="image" id="image" class="form-control" value="{{ $product->image}}">
+                <br>
+                @if($errors->has('image') && !old('image'))
+                    @error('image')
+                        <p style="color:#aa2833;">{{ $message }}</p>
+                    @enderror
+                @endif
+
+                <label for="imagePreview" class="form-label">Image Preview</label>
+                <img class="img-fluid rounded mx-auto d-block" src="{{ asset('storage/'.$product->image)}}" id="file-preview">
                 <button type="submit" class="btn btn-primary">Update</button>
                 {{-- <button href="{{route('select')}}" class="btn btn-danger">Cancel</button> --}}
             </div>
         </form>
     </div>
+    <script>
+        const input = document.getElementById('image');
+        const previewPhoto = () => {
+        const file = input.files;
+            if (file) {
+                const fileReader = new FileReader();
+                const preview = document.getElementById('file-preview');
+                                fileReader.onload = function (event) {
+                    preview.setAttribute('src', event.target.result);
+                }
+                fileReader.readAsDataURL(file[0]);
+            }
+        }
+        input.addEventListener("change", previewPhoto);
+    </script>
     <script type="text/javascript">
         function confirmation(form) {
             event.preventDefault(); // Prevent form submission
